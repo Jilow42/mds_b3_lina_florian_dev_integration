@@ -1,5 +1,6 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
+const { it } = require('mocha')
 const app = require('../index')
 const should = chai.should()
 const expect = chai.expect
@@ -24,3 +25,17 @@ const getCurrentCulor = () => {
   return nextCursor > 0 ? `${colorKey}${nextCursor - 1}` : `${colorKey}O`
 }
 // <-- FIN
+
+it("should return all colors", done => {
+  chai.request(app)
+    .get('/colors')
+    .end((err, res) => {
+      if (err) done(err)
+      expect(res).to.have.status(200)
+      expect(res).to.be.json
+      expect(res.body).to.be.an('object')
+      expect(res.body.results).to.be.an('array')
+      expect(res).not.to.be.undefined
+      done()
+    })
+})
