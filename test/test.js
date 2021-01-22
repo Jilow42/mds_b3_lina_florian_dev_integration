@@ -63,3 +63,16 @@ it("​should add new color​", done => {
     done()
   })
 })
+it("should return new color list Request​", done => {
+  chai.request(app)
+  .get('/colors')
+  .end((err, res) => {
+    if(err) done(err)
+    expect(res).to.have.status(200)
+    expect(res).to.be.json
+    expect(res.body).to.be.an('object')
+    expect(res.body.results).to.be.an('array')
+    expect(res.body.results).include("STONKS")
+    done()
+  })
+})
