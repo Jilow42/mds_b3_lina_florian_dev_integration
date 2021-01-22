@@ -72,6 +72,7 @@ it("should return new color list Request​", done => {
     expect(res).to.be.json
     expect(res.body).to.be.an('object')
     expect(res.body.results).to.be.an('array')
+    expect(res).not.to.be.undefined
     expect(res.body.results).include("STONKS")
     done()
   })
